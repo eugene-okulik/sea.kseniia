@@ -1,6 +1,6 @@
-my_dict = {'tuple':(1, True, 'test', 15, 14.2),'list':[12, 15, 33, 44, 7],
-           'dict': {'Key_1':10, 'Key_2':11, 'Key_3':45, 'Key_4':99, 'Key_5':0},
-           'set':{1, 2, 'Alex', 'Anna', 'Maria'}}
+my_dict = {'tuple': (1, True, 'test', 15, 14.2), 'list': [12, 15, 33, 44, 7],
+           'dict': {'Key_1': 10, 'Key_2': 11, 'Key_3': 45, 'Key_4': 99, 'Key_5': 0},
+           'set': {1, 2, 'Alex', 'Anna', 'Maria'}}
 tuple_value = my_dict['tuple']
 print(tuple_value[-1])
 list_value = my_dict['list']
