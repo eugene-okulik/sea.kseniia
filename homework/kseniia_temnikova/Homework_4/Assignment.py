@@ -8,7 +8,7 @@ list_value.append(13)
 list_value.pop(1)
 print(list_value)
 dict_value = my_dict['dict']
-dict_value['i am a tuple'] = True
+dict_value[('i am a tuple',)] = True
 dict_value.pop('Key_1')
 print(dict_value)
 set_value = my_dict['set']
