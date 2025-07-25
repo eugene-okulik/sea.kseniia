@@ -8,5 +8,5 @@ def guess_game(secret_number):
             print('Ты не угадал, попробуй еще раз')
             continue
 
-guess_game(6)
 
+guess_game(6)
