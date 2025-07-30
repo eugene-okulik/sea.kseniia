@@ -5,8 +5,8 @@ def reply_analizer():
     while True:
         salary = input('What is your salary? Your answer should look like $xxxxx ')
         if salary.startswith('$'):
-            salary = salary[1 :]
-            if len(salary) == 0 :
+            salary = salary[1:]
+            if len(salary) == 0:
                 print("Looks like you didn't enter digits")
                 continue
             flag = True
