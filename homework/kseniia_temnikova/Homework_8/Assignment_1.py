@@ -1,10 +1,11 @@
 import random
 
+
 def reply_analizer():
     while True:
         salary = input('What is your salary? Your answer should look like $xxxxx ')
         if salary.startswith('$'):
-            salary = salary[1:]
+            salary = salary[1 :]
             if len(salary) == 0 :
                 print("Looks like you didn't enter digits")
                 continue
@@ -21,6 +22,7 @@ def reply_analizer():
         else:
             print('Please start your answer with $ symbol')
             continue
+
 
 salary = reply_analizer()
 bonus = [True, False]

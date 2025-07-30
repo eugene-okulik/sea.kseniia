@@ -9,19 +9,20 @@ def fibonachi():
     num_buffer = 0
     count = 1
     while True:
-       if count == 1:
-           count+=1
-           yield 0
-           continue
-       if count == 2:
-           count+=1
-           yield 1
-           continue
-       num_buffer = num_new
-       num_new = num_new + num_previous
-       num_previous = num_buffer
-       count += 1
-       yield num_new
+        if count == 1:
+            count += 1
+            yield 0
+            continue
+        if count == 2:
+            count += 1
+            yield 1
+            continue
+        num_buffer = num_new
+        num_new = num_new + num_previous
+        num_previous = num_buffer
+        count += 1
+        yield num_new
+
 
 count = 0
 for number in fibonachi():
@@ -38,8 +39,3 @@ for number in fibonachi():
     if count == 100000:
         print(f'count ={count}, number={number}')
         break
-
-
-
-
-
