@@ -7,7 +7,7 @@ temperatures = [20, 15, 32, 34, 21, 19, 25, 27, 30, 32, 34, 30, 29, 25,
 # new_temperatures = filter(is_hot,temperatures)
 # print(list(new_temperatures))
 
-new_temperatures = filter(lambda x: x >28, temperatures)
+new_temperatures = filter(lambda x: x > 28, temperatures)
 print(list(new_temperatures))
 print(max(temperatures))
 print(min(temperatures))
