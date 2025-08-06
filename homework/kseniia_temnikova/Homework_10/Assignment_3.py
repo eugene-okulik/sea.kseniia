@@ -21,12 +21,12 @@ def calc(first, second, operation):
     if operation == '+':
         return first + second
     elif operation == '-':
-        return  first - second
+        return first - second
     elif operation == '*':
         return first * second
     elif operation == '/':
         return first / second
 
 
-result = calc(user_first_answer,user_second_answer)
+result = calc(user_first_answer, user_second_answer)
 print(result)
