@@ -8,11 +8,11 @@ def get_all_objects():
 
 def add_new_object():
     body = {
-         "data": {
-                "color": "white",
-                "size": "big"
-            },
-         "name": "Test"
+        "data": {
+            "color": "white",
+            "size": "big"
+        },
+        "name": "Test"
     }
     headers = {'Content-Type': 'application/json'}
     response = requests.post('http://objapi.course.qa-practice.com/object',
