@@ -29,12 +29,13 @@ def object_to_delete():
     headers = {'Content-Type': 'application/json'}
     with allure.step('Making a request'):
         response = requests.post('http://objapi.course.qa-practice.com/object',
-                                json=body, headers=headers)
+                                 json=body, headers=headers)
         response_id = response.json()['id']
         yield response.json()
     with allure.step('Status check'):
         if response.status_code != 400:
             requests.delete(f'http://objapi.course.qa-practice.com/object/{response_id}')
+
 
 @allure.feature('Object manupilaions')
 @allure.story('Add new object')
@@ -65,17 +66,19 @@ def test_add_new_object(body):
     headers = {'Content-Type': 'application/json'}
     with allure.step('Making a request'):
         response = requests.post('http://objapi.course.qa-practice.com/object',
-                                json=body, headers=headers)
+                                 json=body, headers=headers)
     with allure.step('Status check'):
         assert response.status_code == 400, 'Status code is incorrect'
         json_response = response.json()
         assert json_response['data']['color'] == body['data']['color']
+
 
 @allure.feature('Object manupilaions')
 def test_get_object_by_id(object_to_delete):
     id = object_to_delete['id']
     response = requests.get(f'http://objapi.course.qa-practice.com/object/{id}')
     assert response.json(), 'Unable to fetch object by id'
+
 
 @allure.feature('Object manupilaions')
 @allure.story('Change existing object')
@@ -96,6 +99,7 @@ def test_change_object(object_to_delete):
     with allure.step('Object is changed'):
         assert response_body['name'] == "Change object completely", 'Object is not changed'
 
+
 @allure.feature('Object manupilaions')
 @allure.story('Patch existing object')
 def test_patch_object(object_to_delete):
@@ -109,6 +113,7 @@ def test_patch_object(object_to_delete):
         response_body = response.json()
     with allure.step('Patch name check'):
         assert response_body['name'] == "Patched object", 'Object is not patched'
+
 
 @allure.feature('Object manupilaions')
 @allure.story('Delete existing object')
