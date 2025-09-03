@@ -1,1 +1,0 @@
-{"uuid": "1521458a-16f8-4b98-8fb9-3e6046d1ddbe", "children": ["aea66cb8-c81c-4495-8b1c-c30ef0cd2838"], "befores": [{"name": "object_to_delete", "status": "passed", "start": 1756821585563, "stop": 1756821585860}], "afters": [{"name": "object_to_delete::0", "status": "passed", "start": 1756821586157, "stop": 1756821586450}], "start": 1756821585563, "stop": 1756821586450}
