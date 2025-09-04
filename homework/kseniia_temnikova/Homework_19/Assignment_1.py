@@ -3,7 +3,7 @@ import requests
 
 def get_all_objects():
     response = requests.get('http://objapi.course.qa-practice.com/object').json()
-    assert len(response['data']) > 0
+    assert len(response['data']) < 0
 
 
 def add_new_object():
