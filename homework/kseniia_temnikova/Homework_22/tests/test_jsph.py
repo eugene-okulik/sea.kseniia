@@ -73,10 +73,8 @@ def test_get_by_id(created_mock_object, get_endpoint):
 
 
 @pytest.mark.parametrize('body', TEST_DATA_TO_CHANGE_COMPLETELY)
-@pytest.mark.parametrize('body_new_object', TEST_DATA)
-def test_change_object_completely(create_post_endpoint, change_endpoint, body, body_new_object):
-    new_object = create_post_endpoint.add_new_object(body_new_object, None)
-    id = new_object.json()['id']
+def test_change_object_completely(created_mock_object, change_endpoint, body):
+    id = created_mock_object['id']
     change_endpoint.change_object_completely(id, body)
     change_endpoint.check_status_is_200()
 
