@@ -44,6 +44,3 @@ def created_mock_object(create_post_endpoint, delete_endpoint):
     yield create_post_endpoint.json
     id = create_post_endpoint.json['id']
     delete_endpoint.delete_an_object(id)
-
-
-
