@@ -78,6 +78,7 @@ def test_change_object_completely(created_mock_object, change_endpoint, body):
     change_endpoint.change_object_completely(id, body)
     change_endpoint.check_status_is_200()
 
+
 def test_delete_an_object(created_mock_object, delete_endpoint):
     id = created_mock_object['id']
     delete_endpoint.delete_an_object(id, None)
@@ -85,7 +86,7 @@ def test_delete_an_object(created_mock_object, delete_endpoint):
 
 
 @pytest.mark.parametrize('patcher', DATA_TO_PATCH)
-def test_patch_an_object(created_mock_object,  patch_endpoint, patcher):
+def test_patch_an_object(created_mock_object, patch_endpoint, patcher):
     id = created_mock_object['id']
     patch_endpoint.patch_partially(id, patcher, None)
     patch_endpoint.check_status_is_200()
