@@ -68,7 +68,7 @@ def test_add_new_object(body):
         response = requests.post('http://objapi.course.qa-practice.com/object',
                                  json=body, headers=headers)
     with allure.step('Status check'):
-        assert response.status_code == 400, 'Status code is incorrect'
+        assert response.status_code == 200, 'Status code is incorrect'
         json_response = response.json()
         assert json_response['data']['color'] == body['data']['color']
 
