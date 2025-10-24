@@ -22,4 +22,3 @@ def test_pick_language(driver):
     submit_button.click()
     selected_language = driver.find_element(By.ID, 'result-text')
     assert selected_language.text == 'Python'
-    time.sleep(5)

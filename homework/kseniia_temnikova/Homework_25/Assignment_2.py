@@ -4,10 +4,15 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+
 import pytest
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
+
+SUBJECT_INPUT = (By.ID, "subjectsInput")
+OPTION = (By.XPATH, "//div[contains(@class,'subjects-auto-complete__option')]")
+CHIP_LABELS = (By.XPATH, "//div[contains(@class,'subjects-auto-complete__multi-value__label')]")
 
 
 @pytest.fixture()
@@ -48,6 +53,25 @@ def find_element_by_and_click_by_idx(driver, By, arg, idx):
     return elements[idx].click()
 
 
+def type_subject(driver, prefix: str):
+    wait = WebDriverWait(driver, 10)
+    field = wait.until(EC.element_to_be_clickable(SUBJECT_INPUT))
+    field.send_keys(prefix)
+    wait.until(EC.visibility_of_element_located(OPTION))
+    return field
+
+
+def pick_option_by_text(driver, text: str):
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.element_to_be_clickable(SUBJECT_INPUT))
+    xpath = f"//div[contains(@class,'subjects-auto-complete__option') and normalize-space()='{text}']"
+    wait.until(EC.element_to_be_clickable((By.XPATH, xpath))).click()
+
+
+def selected_subjects(driver):
+    return [el.text.strip() for el in driver.find_elements(*CHIP_LABELS)]
+
+
 def test_send_data(driver):
     driver.get('https://demoqa.com/automation-practice-form')
     driver.execute_script("window.scrollTo(0, 300);")
@@ -60,6 +84,10 @@ def test_send_data(driver):
     find_element_by_and_select_by_value(driver, By.CLASS_NAME, 'react-datepicker__month-select', '5')
     find_element_by_and_select_by_value(driver, By.CLASS_NAME, 'react-datepicker__year-select', '1939')
     find_element_by_and_click(driver, By.CLASS_NAME, "react-datepicker__day--012")
+
+    type_subject(driver, "ma")
+    pick_option_by_text(driver, "Maths")
+
     find_element_by_and_click(driver, By.XPATH, '//label[@for="hobbies-checkbox-1"]')
     address = driver.find_element(By.ID, "currentAddress")
     address.send_keys('Testing address')
@@ -81,6 +109,7 @@ def test_send_data(driver):
     gender = get_value("Gender")
     mobile = get_value("Mobile")
     birthdate = get_value("Date of Birth")
+    subjects = get_value('Subjects')
     hobbies = get_value("Hobbies")
     address = get_value('Address')
     first_name, last_name = full_name.split(maxsplit=1)
@@ -90,5 +119,6 @@ def test_send_data(driver):
     assert gender == "Female"
     assert mobile == "1234567890"
     assert birthdate == '12 June,1939'
+    assert subjects == 'Maths'
     assert hobbies == 'Sports'
     assert address == 'Testing address'
