@@ -75,13 +75,13 @@ def selected_subjects(driver):
 def test_send_data(driver):
     driver.get('https://demoqa.com/automation-practice-form')
     driver.execute_script(
-        "window.scrollTo(0, 400);")  # подкрутили чуть больше, потому что реклама иногда бывает большая
+        "window.scrollTo(0, 400);")
     find_element_by_and_send_key(driver, By.ID, 'firstName', 'Linda')
     find_element_by_and_send_key(driver, By.ID, 'lastName', 'Piney')
     find_element_by_and_send_key(driver, By.ID, 'userEmail', 'testuser@mail.com')
     find_element_by_and_click(driver, By.XPATH, "//label[@for='gender-radio-2']")
     find_element_by_and_send_key(driver, By.ID, 'userNumber', '1234567890')
-    driver.execute_script("window.scrollTo(0, 600);")  # подкрутили здесь, а то не видит какие-то поля
+    driver.execute_script("window.scrollTo(0, 600);")
     find_element_by_and_click(driver, By.ID, 'dateOfBirthInput')
     find_element_by_and_select_by_value(driver, By.CLASS_NAME, 'react-datepicker__month-select', '5')
     find_element_by_and_select_by_value(driver, By.CLASS_NAME, 'react-datepicker__year-select', '1939')
@@ -90,7 +90,7 @@ def test_send_data(driver):
     type_subject(driver, "ma")
     pick_option_by_text(driver, "Maths")
 
-    driver.execute_script("window.scrollTo(0, 1100);")  # подкрутили внизу страницы
+    driver.execute_script("window.scrollTo(0, 1100);")  
     find_element_by_and_click(driver, By.XPATH, '//label[@for="hobbies-checkbox-1"]')
     address = driver.find_element(By.ID, "currentAddress")
     address.send_keys('Testing address')
@@ -109,7 +109,7 @@ def test_send_data(driver):
     table = wait.until(EC.visibility_of_element_located((
         By.CSS_SELECTOR, "div.modal-body table.table"
     )))
-    time.sleep(4)
+
 
     def get_value(label_text: str) -> str:
         xpath = f".//td[normalize-space()='{label_text}']/following-sibling::td[1]"
