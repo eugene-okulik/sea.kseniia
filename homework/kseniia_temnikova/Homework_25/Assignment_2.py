@@ -9,6 +9,7 @@ import pytest
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.keys import Keys
 
 SUBJECT_INPUT = (By.ID, "subjectsInput")
 OPTION = (By.XPATH, "//div[contains(@class,'subjects-auto-complete__option')]")
@@ -21,7 +22,7 @@ def driver():
     options.add_experimental_option('detach', True)
     chrome_driver = webdriver.Chrome(options=options)
     chrome_driver.implicitly_wait(5)
-    chrome_driver.maximize_window()
+    chrome_driver.set_window_size(375, 812)
     yield chrome_driver
 
 
@@ -38,8 +39,7 @@ def find_element_by_and_send_key(driver, by, arg, key):
 
 def find_element_by_and_click(driver, by, arg):
     element = find_element_by(driver, by, arg)
-    driver.execute_script('arguments[0].click()', element)
-    return element
+    element.click()
 
 
 def find_element_by_and_select_by_value(driver, by, arg, value):
@@ -74,12 +74,14 @@ def selected_subjects(driver):
 
 def test_send_data(driver):
     driver.get('https://demoqa.com/automation-practice-form')
-    driver.execute_script("window.scrollTo(0, 300);")
+    driver.execute_script(
+        "window.scrollTo(0, 400);")  # подкрутили чуть больше, потому что реклама иногда бывает большая
     find_element_by_and_send_key(driver, By.ID, 'firstName', 'Linda')
     find_element_by_and_send_key(driver, By.ID, 'lastName', 'Piney')
     find_element_by_and_send_key(driver, By.ID, 'userEmail', 'testuser@mail.com')
     find_element_by_and_click(driver, By.XPATH, "//label[@for='gender-radio-2']")
     find_element_by_and_send_key(driver, By.ID, 'userNumber', '1234567890')
+    driver.execute_script("window.scrollTo(0, 600);")  # подкрутили здесь, а то не видит какие-то поля
     find_element_by_and_click(driver, By.ID, 'dateOfBirthInput')
     find_element_by_and_select_by_value(driver, By.CLASS_NAME, 'react-datepicker__month-select', '5')
     find_element_by_and_select_by_value(driver, By.CLASS_NAME, 'react-datepicker__year-select', '1939')
@@ -88,10 +90,20 @@ def test_send_data(driver):
     type_subject(driver, "ma")
     pick_option_by_text(driver, "Maths")
 
+    driver.execute_script("window.scrollTo(0, 1100);")  # подкрутили внизу страницы
     find_element_by_and_click(driver, By.XPATH, '//label[@for="hobbies-checkbox-1"]')
     address = driver.find_element(By.ID, "currentAddress")
     address.send_keys('Testing address')
-    driver.execute_script("window.scrollTo(0, 600);")
+
+    driver.find_element(By.ID, 'state').click()
+    state_input = driver.find_element(By.ID, 'react-select-3-input')
+    state_input.send_keys('NCR')
+    state_input.send_keys(Keys.ENTER)
+
+    driver.find_element(By.ID, 'city').click()
+    city_input = driver.find_element(By.ID, 'react-select-4-input')
+    city_input.send_keys('Delhi')
+    city_input.send_keys(Keys.ENTER)
     find_element_by_and_click(driver, By.ID, 'submit')
     wait = WebDriverWait(driver, 10)
     table = wait.until(EC.visibility_of_element_located((
