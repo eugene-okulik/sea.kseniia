@@ -90,7 +90,7 @@ def test_send_data(driver):
     type_subject(driver, "ma")
     pick_option_by_text(driver, "Maths")
 
-    driver.execute_script("window.scrollTo(0, 1100);")  
+    driver.execute_script("window.scrollTo(0, 1100);")
     find_element_by_and_click(driver, By.XPATH, '//label[@for="hobbies-checkbox-1"]')
     address = driver.find_element(By.ID, "currentAddress")
     address.send_keys('Testing address')
@@ -109,7 +109,6 @@ def test_send_data(driver):
     table = wait.until(EC.visibility_of_element_located((
         By.CSS_SELECTOR, "div.modal-body table.table"
     )))
-
 
     def get_value(label_text: str) -> str:
         xpath = f".//td[normalize-space()='{label_text}']/following-sibling::td[1]"
